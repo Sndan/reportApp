@@ -1,0 +1,39 @@
+<ion-toolbar primary>
+    <ion-navbar  *navbar>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Reporting System</ion-title>
+  </ion-navbar>
+  <ion-buttons start>
+    <button>
+      <ion-icon name="more"></ion-icon>
+    </button>
+    <button royal>
+      <ion-icon name="search"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-buttons end>
+    <button royal>
+      <ion-icon name="md-add-circle"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content padding class="getting-started">
+  <h3 *ngIf='!isAuth'>Welcome to eO2 task reporting system.</h3>
+  <p *ngIf='!isAuth'>it seems that you did not logged in, please login before using the system</p>
+  <login *ngIf='!isAuth'></login>
+  <div *ngIf='isAuth'>
+    <ion-grid>
+      <ion-row>
+        <ion-col width-33>This column will take 10% of space</ion-col>
+      </ion-row>
+    </ion-grid>
+		<h3>Hello, {{ userinfo.email }}</h3>
+		<p><strong>Your private message:</strong>{{userinfo.email}}</p>
+		<div padding>
+			<logout></logout>
+		</div>
+	</div>
+</ion-content>
