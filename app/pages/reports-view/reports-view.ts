@@ -47,14 +47,42 @@ export class ReportsViewPage {
 ``  }
     public loadUserReports(){
         return new Promise(res => {
-            // this method...
+            //this method...
             this._data.db.child('report-tasks/'+ this._user.auth.currentUser.uid).on('value', data => {
-                this.reports = Object.keys(data.val()).map((key)=>{ return data.val()[key]});//data.val();
-                Object.keys(data.val()).map((key)=>{ return data.val()[key]});
+                // data = [];
+                // data.forEach(element => {
+                var keys =  Object.keys(data.val());    
+                var value = Object.keys(data.val()).map((key)=>{ return data.val()[key]});
+                // });
+                var reportsData = [];
+                for (var index = 0; index < keys.length; index++) {
+                    var key = keys[index];
+                    var pattern = /(\d{4})(\d{2})(\d{2})/;
+                    var dt = new Date(key.replace(pattern,'$1-$2-$3'));
+                    reportsData.push({date:key.replace(pattern,'$1-$2-$3'),tasks:value[index]});
+                    console.log(key.replace(pattern,'$1-$2-$3'));
+                    
+                }
+                //console.log(reportsData);
+                this.reports = reportsData;
+                Object.keys(data.val()).map((key)=>{ return [data.val()[key]]});
                 //this.reports.$id =data.key();
                 console.log(this.reports);
                 res();
             });
+            // this._data.db.child('report-tasks/'+ this._user.auth.currentUser.uid).orderByKey().
+            // once("value")
+            // .then(function(snapshot) {
+            //     snapshot.forEach(function(childSnapshot) {
+            //         // key will be "ada" the first time and "alan" the second time
+            //         var key = childSnapshot.key;
+            //         // childData will be the actual contents of the child
+            //         var childData = childSnapshot.val();
+            //     // this.reports = [{key:childData}];
+            //         console.log(childData);
+            //         res();
+            //     });
+            // });
         });
     }
     public loadUserInfo(){

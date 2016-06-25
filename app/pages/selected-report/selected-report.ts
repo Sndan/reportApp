@@ -14,12 +14,13 @@ export class SelectedReportPage{
   public report:any;
   
   constructor(private _navController: NavController, private _navParams: NavParams) {
-    this.report = this._navParams.data.selectedReport;
+    //this.report = this._navParams.data.selectedReport;
   }
 
   ionViewWillEnter(){
-    this.report = this._navParams.data.selectedReport;
-
+    var data = this._navParams.data.selectedReport;
+    this.report = Object.keys(data).map((key)=>{ return data[key]});
+    console.log(Object.keys(this.report).map((key)=>{ return this.report[key]}));
   }
 
   goBack(){

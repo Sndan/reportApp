@@ -29,9 +29,11 @@
   <login *ngIf='!isAuth'></login>
 	<div *ngIf='isAuth'>
     <ion-list>
-      <ion-item *ngFor="let report of reports" (click)="selectReport(report)">
-        {{report.author}}
-        <button dark (click)="selectReport(report)">Dark</button>
+      <ion-item *ngFor="let report of reports" (click)="selectReport(report.tasks)">
+        {{report.date  | date}}
+        <!--<ion-item *ngFor="let task of report.Date" (click)="selectReport(report)">
+         {{task.author}}
+        </ion-item>-->
       </ion-item>
     </ion-list>
 	</div>
